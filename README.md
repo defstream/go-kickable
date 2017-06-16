@@ -13,13 +13,14 @@ Currently only the word "it" is kickable.
 
 # API
 
-## Install
+### Install
 
 ```shell
 go get -u github.com/defstream/go-kicakble
 ```
 
-## Usage
+### Usage
+
 
 ```go
 package main
