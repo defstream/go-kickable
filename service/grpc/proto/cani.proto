@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+service Kickable {
+	rpc CanIKick(CanIKickRequest) returns (CanIKickResponse) {}
+}
+
+message CanIKickRequest {
+	string it = 1;
+}
+
+message CanIKickResponse {
+	string response = 1;
+}
