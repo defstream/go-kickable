@@ -16,7 +16,7 @@ Currently only the word "it" is kickable.
 ### Install
 
 ```shell
-go get -u github.com/defstream/go-kicakble
+go get -u github.com/defstream/go-kickable
 ```
 
 ### Usage
