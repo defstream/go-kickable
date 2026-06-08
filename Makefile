@@ -84,17 +84,19 @@ kite:
 	@go build -o bin/cani.kite.client ./service/kite/cmd/client
 .PHONY: kite
 
-grpc: 	
-	@protoc -I${GOPATH}/src --go_out=plugins=grpc:${GOPATH}/src ${GOPATH}/src/github.com/defstream/go-kickable/service/grpc/proto/cani.proto 
+grpc:
 	@go build -o bin/cani.grpc.server ./service/grpc/cmd/server
 	@go build -o bin/cani.grpc.client ./service/grpc/cmd/client
 .PHONY: grpc
 
+# proto-grpc: regenerates service/grpc/proto/cani.pb.go (requires protoc, protoc-gen-go, protoc-gen-go-grpc)
+proto-grpc:
+	@protoc --go_out=. --go-grpc_out=. ./service/grpc/proto/cani.proto
+.PHONY: proto-grpc
+
 micro:
-	@protoc -I${GOPATH}/src --go_out=plugins=micro:${GOPATH}/src ${GOPATH}/src/github.com/defstream/go-kickable/service/micro/proto/cani.proto
 	@go build -o bin/cani.micro.server ./service/micro/cmd/server
 	@go build -o bin/cani.micro.client ./service/micro/cmd/client
-
 .PHONY: micro
 
 graphql: 

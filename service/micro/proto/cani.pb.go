@@ -18,9 +18,10 @@ import fmt "fmt"
 import math "math"
 
 import (
-	client "github.com/micro/go-micro/client"
-	server "github.com/micro/go-micro/server"
-	context "golang.org/x/net/context"
+	"context"
+
+	client "go-micro.dev/v4/client"
+	server "go-micro.dev/v4/server"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -116,8 +117,8 @@ type KickableHandler interface {
 	CanIKick(context.Context, *CanIKickRequest, *CanIKickResponse) error
 }
 
-func RegisterKickableHandler(s server.Server, hdlr KickableHandler, opts ...server.HandlerOption) {
-	s.Handle(s.NewHandler(&Kickable{hdlr}, opts...))
+func RegisterKickableHandler(s server.Server, hdlr KickableHandler, opts ...server.HandlerOption) error {
+	return s.Handle(s.NewHandler(&Kickable{hdlr}, opts...))
 }
 
 type Kickable struct {

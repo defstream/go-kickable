@@ -44,7 +44,7 @@ func (s *Service) Run() error {
 	for {
 		conn, err := l.Accept()
 		if err != nil {
-			fmt.Printf(err.Error())
+			fmt.Println(err)
 		}
 
 		go server.ServeCodec(jsonrpc.NewServerCodec(conn))

@@ -13,10 +13,14 @@ Currently only the word "it" is kickable.
 
 # API
 
+### Requirements
+
+Go 1.21 or later. This module uses Go Modules — no `dep` or `vendor` setup needed.
+
 ### Install
 
 ```shell
-go get -u github.com/defstream/go-kickable
+go get github.com/defstream/go-kickable@latest
 ```
 
 ### Usage
@@ -26,6 +30,7 @@ go get -u github.com/defstream/go-kickable
 package main
 
 import (
+    "fmt"
     "github.com/defstream/go-kickable"
 )
 
@@ -59,7 +64,7 @@ Returns a string message indicating if it is kickable or not.
 ## Get Source
 
 ```shell
-git clone http://github.com/defstream/go-kickable
+git clone https://github.com/defstream/go-kickable
 cd go-kickable
 ```
 
@@ -88,7 +93,7 @@ make all
 - 😀 [GraphQL](./service/graphql/README.md)
 - 😀 [GRPC](service/grpc/README.md)
     - 😩 HTTP Gateway
-- 😀 [Go-Micro](service/micro/README.md)
+- 😀 [Go-Micro](service/micro/README.md) (go-micro.dev/v4, mDNS discovery)
 - 😀 [HTTP](service/http/README.md)
     - 😩 CORS
     - 😩 Keep Alives

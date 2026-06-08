@@ -1,10 +1,12 @@
 package grpc
 
 import (
+	"context"
+
 	proto "github.com/defstream/go-kickable/service/grpc/proto"
 
-	"golang.org/x/net/context"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
 type Client struct {
@@ -13,7 +15,7 @@ type Client struct {
 }
 
 func NewClient(addr string) (*Client, error) {
-	conn, err := grpc.Dial(addr, grpc.WithInsecure())
+	conn, err := grpc.NewClient(addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		return nil, err
 	}

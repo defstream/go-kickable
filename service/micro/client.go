@@ -1,24 +1,24 @@
 package micro
 
 import (
-	proto "github.com/defstream/go-kickable/service/micro/proto"
+	"context"
 
-	gomicro "github.com/micro/go-micro"
-	"golang.org/x/net/context"
+	proto "github.com/defstream/go-kickable/service/micro/proto"
+	micro "go-micro.dev/v4"
 )
 
 type Client struct {
-	service gomicro.Service
+	service micro.Service
 	client  proto.KickableClient
 }
 
 func NewClient() *Client {
-	service := gomicro.NewService(gomicro.Name("kicakble.client"))
-	client := proto.NewKickableClient("Kickable", service.Client())
+	svc := micro.NewService(micro.Name("kickable.client"))
+	c := proto.NewKickableClient("Kickable", svc.Client())
 
 	return &Client{
-		service: service,
-		client:  client,
+		service: svc,
+		client:  c,
 	}
 }
 
@@ -34,6 +34,5 @@ func (c *Client) CanIKick(ctx context.Context, it string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-
 	return res.Response, nil
 }

@@ -18,7 +18,7 @@ import fmt "fmt"
 import math "math"
 
 import (
-	context "golang.org/x/net/context"
+	"context"
 	grpc "google.golang.org/grpc"
 )
 
@@ -85,16 +85,16 @@ type KickableClient interface {
 }
 
 type kickableClient struct {
-	cc *grpc.ClientConn
+	cc grpc.ClientConnInterface
 }
 
-func NewKickableClient(cc *grpc.ClientConn) KickableClient {
+func NewKickableClient(cc grpc.ClientConnInterface) KickableClient {
 	return &kickableClient{cc}
 }
 
 func (c *kickableClient) CanIKick(ctx context.Context, in *CanIKickRequest, opts ...grpc.CallOption) (*CanIKickResponse, error) {
 	out := new(CanIKickResponse)
-	err := grpc.Invoke(ctx, "/Kickable/CanIKick", in, out, c.cc, opts...)
+	err := c.cc.Invoke(ctx, "/Kickable/CanIKick", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}

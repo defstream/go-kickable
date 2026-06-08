@@ -1,40 +1,35 @@
 package micro
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/defstream/go-kickable"
+	kickable "github.com/defstream/go-kickable"
 	proto "github.com/defstream/go-kickable/service/micro/proto"
-
-	gomicro "github.com/micro/go-micro"
-
-	"golang.org/x/net/context"
+	micro "go-micro.dev/v4"
 )
 
 type Service struct {
-	service gomicro.Service
+	service micro.Service
 }
 
 func NewService() *Service {
-	// Define the Micro Service
-	service := gomicro.NewService(
-		gomicro.Name("Kickable"),
-		gomicro.Version("latest"),
-		gomicro.Metadata(map[string]string{
+	svc := micro.NewService(
+		micro.Name("Kickable"),
+		micro.Version("latest"),
+		micro.Metadata(map[string]string{
 			"type": "Kickable",
 		}),
 	)
 
-	// Initialize the servie
-	service.Init()
+	svc.Init()
 
-	s := &Service{
-		service: service,
+	s := &Service{service: svc}
+
+	if err := proto.RegisterKickableHandler(svc.Server(), s); err != nil {
+		panic(err)
 	}
-	// Register handler
-	proto.RegisterKickableHandler(service.Server(), s)
 
-	// Return the micro service
 	return s
 }
 

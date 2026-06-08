@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
-	gql "github.com/neelance/graphql-go"
-	"github.com/neelance/graphql-go/relay"
+	gql "github.com/graph-gophers/graphql-go"
+	"github.com/graph-gophers/graphql-go/relay"
 )
 
 var schema *gql.Schema
