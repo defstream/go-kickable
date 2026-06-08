@@ -21,7 +21,6 @@ func NewService(address string) *Service {
 }
 
 func (s *Service) Run() error {
-	// Create a kite.
 	k := kite.New("Kickable", "1.0.0")
 	k.HandleFunc("CanIKick", func(r *kite.Request) (interface{}, error) {
 

@@ -15,7 +15,6 @@ func NewClient(address string) *Client {
 
 	k := kite.New("Kickable", "1.0.0")
 
-	// Connect to our math kite
 	client := k.NewClient(address)
 
 	client.Dial()
@@ -26,7 +25,7 @@ func NewClient(address string) *Client {
 }
 
 func (c *Client) CanIKick(ctx context.Context, it string) (string, error) {
-	r, err := c.client.Tell("CanIKick", it) // call "square" method with argument 4
+	r, err := c.client.Tell("CanIKick", it)
 	if err != nil {
 		return "", err
 	}

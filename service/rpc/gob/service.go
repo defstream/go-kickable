@@ -11,7 +11,6 @@ import (
 type Kickable struct {
 }
 
-//This procedure is invoked by rpc and calls rpcexample.Multiply which stores product of args.A and args.B in result pointer
 func (s *Kickable) CanIKick(it string, result *string) error {
 	*result = kickable.CanIKick(it)
 	return nil

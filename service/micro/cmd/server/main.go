@@ -1,4 +1,3 @@
-
 package main
 
 import (
@@ -8,10 +7,8 @@ import (
 )
 
 func main() {
-	// Define the Kickable Micro Service
 	service := micro.NewService()
 
-	// Run the server
 	if err := service.Run(); err != nil {
 		fmt.Println(err)
 	}
