@@ -68,3 +68,5 @@ require (
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
+
+replace github.com/dgrijalva/jwt-go => ./internal/jwt-compat
