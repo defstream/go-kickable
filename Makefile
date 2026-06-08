@@ -47,14 +47,10 @@ all:
 	
 install:
 	@echo "😁  make install"
-	@echo "⚙️  installing dependencies..."
-	@./scripts/make-install.sh
-	@echo "⚙️  installed dependencies."
-	@echo "⚙️  building cani..."
-	@make build
-	@echo "⚙️  built cani."
+	@echo "⚙️  downloading modules..."
+	@go mod download
 	@echo "⚙️  installing cani..."
-	@cp bin/cani ${GOPATH}/bin
+	@go install ./cmd
 	@echo "⚙️  installed cani."
 	@echo "😁  make install complete."
 .PHONY: install
