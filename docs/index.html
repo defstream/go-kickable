@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>go-kickable — Can I Kick It?</title>
+  <meta name="description" content="go-kickable is a Go package built to answer the age old question… Can I Kick It? Plus a showcase of microservice technologies and patterns." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.0" integrity="sha384-d5Pc0U2WLIrcpPz/5dTNl91xwJLvbdD+V3+kao+QnRyFRNDW1mKqxoM9b6fzPxsS" crossorigin="anonymous"></script>
+  <style type="text/tailwindcss">
+    @theme {
+      --color-ink: #0b0e0b;
+      --color-ink-2: #121712;
+      --color-ink-3: #1a221a;
+      --color-chalk: #eef4ee;
+      --color-fog: #9db39d;
+      --color-kick: #19c95c;
+      --color-kick-dim: #0e7a39;
+      --color-vinyl: #e3122e;
+      --font-display: "Bungee", cursive;
+      --font-mono: "IBM Plex Mono", monospace;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @keyframes spin-slow {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+
+    .marquee-track { animation: marquee 22s linear infinite; }
+    .spin-slow { animation: spin-slow 6s linear infinite; }
+    .rise { opacity: 0; animation: rise .7s cubic-bezier(.22,1,.36,1) forwards; }
+    .cursor-blink::after { content: "▌"; animation: blink 1s steps(1) infinite; color: var(--color-kick); }
+
+    .halftone {
+      background-image: radial-gradient(rgba(25,201,92,.16) 1px, transparent 1.5px);
+      background-size: 22px 22px;
+    }
+    .grain::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 50;
+      opacity: .06;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .outline-text {
+      color: transparent;
+      -webkit-text-stroke: 2px var(--color-chalk);
+    }
+  </style>
+</head>
+<body class="grain bg-ink text-chalk font-mono antialiased selection:bg-kick selection:text-ink">
+
+  <!-- top marquee -->
+  <div class="overflow-hidden bg-kick text-ink border-b-4 border-vinyl">
+    <div class="marquee-track flex w-max whitespace-nowrap font-display text-sm py-2" aria-hidden="true">
+      <span class="px-4">CAN I KICK IT? ★ YES YES YOU CAN ★ CAN I KICK IT? ★ YES YES YOU CAN ★ CAN I KICK IT? ★ YES YES YOU CAN ★ CAN I KICK IT? ★ YES YES YOU CAN ★&nbsp;</span>
+      <span class="px-4">CAN I KICK IT? ★ YES YES YOU CAN ★ CAN I KICK IT? ★ YES YES YOU CAN ★ CAN I KICK IT? ★ YES YES YOU CAN ★ CAN I KICK IT? ★ YES YES YOU CAN ★&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- nav -->
+  <header class="max-w-5xl mx-auto px-6 py-6 flex items-center justify-between">
+    <a href="#" class="flex items-center gap-3 group">
+      <span class="spin-slow inline-block size-8 rounded-full bg-vinyl relative">
+        <span class="absolute inset-[9px] rounded-full bg-ink"></span>
+        <span class="absolute inset-[13px] rounded-full bg-kick"></span>
+      </span>
+      <span class="font-display text-lg tracking-wide group-hover:text-kick transition-colors">go-kickable</span>
+    </a>
+    <nav class="flex items-center gap-6 text-sm">
+      <a href="#api" class="hover:text-kick transition-colors">API</a>
+      <a href="#showcase" class="hover:text-kick transition-colors">Showcase</a>
+      <a href="https://github.com/defstream/go-kickable" class="border-2 border-chalk px-3 py-1.5 hover:bg-kick hover:text-ink hover:border-kick transition-colors font-bold">GitHub ↗</a>
+    </nav>
+  </header>
+
+  <!-- hero -->
+  <main>
+    <section class="halftone border-y-2 border-ink-3">
+      <div class="max-w-5xl mx-auto px-6 pt-20 pb-16">
+        <p class="rise text-kick text-sm tracking-[.35em] uppercase mb-6" style="animation-delay:.05s">A Go package · est. on the boombox</p>
+        <h1 class="font-display leading-[.95] text-[clamp(2.8rem,9vw,7rem)]">
+          <span class="rise block" style="animation-delay:.15s">Can I</span>
+          <span class="rise block text-kick" style="animation-delay:.3s">Kick</span>
+          <span class="rise block outline-text" style="animation-delay:.45s">It?</span>
+        </h1>
+        <p class="rise mt-8 max-w-xl text-fog leading-relaxed" style="animation-delay:.6s">
+          <strong class="text-chalk">go-kickable</strong> answers the age old question — and showcases
+          microservice technologies and patterns while it's at it.
+          Currently only the word <code class="text-kick">"it"</code> is kickable.
+        </p>
+
+        <!-- live checker -->
+        <div class="rise mt-10 max-w-xl border-2 border-chalk bg-ink-2 shadow-[8px_8px_0_0_var(--color-vinyl)]" style="animation-delay:.75s">
+          <div class="flex items-center gap-2 px-4 py-2 border-b-2 border-ink-3 text-xs text-fog">
+            <span class="size-2.5 rounded-full bg-vinyl"></span>
+            <span class="size-2.5 rounded-full bg-kick"></span>
+            <span class="size-2.5 rounded-full bg-chalk"></span>
+            <span class="ml-2">kickable — live check</span>
+          </div>
+          <form id="kick-form" class="flex items-stretch">
+            <label for="kick-input" class="flex items-center pl-4 text-kick font-bold" aria-label="prompt">$ cani -kick</label>
+            <input id="kick-input" type="text" value="it" autocomplete="off" spellcheck="false"
+              class="flex-1 bg-transparent px-3 py-4 outline-none placeholder:text-fog/50 min-w-0" placeholder='"it"' />
+            <button type="submit" class="font-display text-sm bg-kick text-ink px-5 hover:bg-vinyl hover:text-chalk transition-colors">RUN</button>
+          </form>
+          <output id="kick-output" for="kick-input" class="block px-4 pb-4 pt-1 text-lg font-bold cursor-blink" aria-live="polite"></output>
+        </div>
+
+        <!-- install -->
+        <div class="rise mt-8 flex flex-wrap items-center gap-4 text-sm" style="animation-delay:.9s">
+          <button id="copy-install" class="group flex items-center gap-3 border-2 border-ink-3 bg-ink-2 px-4 py-3 hover:border-kick transition-colors" title="Copy to clipboard">
+            <span class="text-fog select-none">$</span>
+            <code>go get github.com/defstream/go-kickable@latest</code>
+            <span class="text-fog group-hover:text-kick transition-colors" id="copy-label">⧉</span>
+          </button>
+          <span class="text-fog">Go 1.21+ · Go Modules · MIT</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- usage -->
+    <section class="max-w-5xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-10 items-start">
+      <div>
+        <h2 class="font-display text-2xl text-kick mb-2">Use the package</h2>
+        <p class="text-fog text-sm mb-6 leading-relaxed">Import it, ask the question, get the only correct answer.</p>
+        <pre class="border-2 border-ink-3 bg-ink-2 p-5 text-sm overflow-x-auto leading-relaxed"><code><span class="text-fog">package</span> main
+
+<span class="text-fog">import</span> (
+    <span class="text-kick">"fmt"</span>
+    <span class="text-kick">"github.com/defstream/go-kickable"</span>
+)
+
+<span class="text-fog">func</span> <span class="text-vinyl">main</span>() {
+    response := kickable.<span class="text-vinyl">CanIKick</span>(<span class="text-kick">"it"</span>)
+    fmt.<span class="text-vinyl">Println</span>(response) <span class="text-fog">// Yes, yes you can.</span>
+}</code></pre>
+      </div>
+      <div>
+        <h2 class="font-display text-2xl text-kick mb-2">Or the CLI</h2>
+        <p class="text-fog text-sm mb-6 leading-relaxed">Clone, <code class="text-chalk">make install</code>, and kick from your terminal.</p>
+        <pre class="border-2 border-ink-3 bg-ink-2 p-5 text-sm overflow-x-auto leading-relaxed"><code><span class="text-fog">$</span> git clone https://github.com/defstream/go-kickable
+<span class="text-fog">$</span> cd go-kickable
+<span class="text-fog">$</span> make install
+<span class="text-fog">$</span> cani -kick <span class="text-kick">"it"</span>
+<span class="text-chalk font-bold">Yes, yes you can.</span></code></pre>      </div>
+    </section>
+
+    <!-- api -->
+    <section id="api" class="border-y-2 border-ink-3 bg-ink-2">
+      <div class="max-w-5xl mx-auto px-6 py-20">
+        <h2 class="font-display text-3xl mb-10">The <span class="text-vinyl">API</span></h2>
+        <div class="grid sm:grid-cols-2 gap-6">
+          <div class="border-2 border-ink-3 bg-ink p-6 hover:border-kick hover:-translate-y-1 transition-all">
+            <code class="text-kick font-bold">func Kickable(it string) bool</code>
+            <p class="text-fog text-sm mt-3 leading-relaxed">Returns <code class="text-chalk">true</code> if kickable, otherwise <code class="text-chalk">false</code>. Case-insensitive — <code class="text-chalk">"IT"</code> kicks too.</p>
+          </div>
+          <div class="border-2 border-ink-3 bg-ink p-6 hover:border-kick hover:-translate-y-1 transition-all">
+            <code class="text-kick font-bold">func CanIKick(it string) string</code>
+            <p class="text-fog text-sm mt-3 leading-relaxed">Returns a string message indicating whether <code class="text-chalk">it</code> is kickable or not.</p>
+          </div>
+          <div class="border-2 border-ink-3 bg-ink p-6 hover:border-vinyl hover:-translate-y-1 transition-all">
+            <code class="text-vinyl font-bold">Yes string</code>
+            <p class="text-fog text-sm mt-3 leading-relaxed">The message returned when an item is kickable: <em class="text-chalk">"Yes, yes you can."</em></p>
+          </div>
+          <div class="border-2 border-ink-3 bg-ink p-6 hover:border-vinyl hover:-translate-y-1 transition-all">
+            <code class="text-vinyl font-bold">No string</code>
+            <p class="text-fog text-sm mt-3 leading-relaxed">The message returned when an item is not kickable: <em class="text-chalk">"No."</em></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- showcase -->
+    <section id="showcase" class="max-w-5xl mx-auto px-6 py-20">
+      <h2 class="font-display text-3xl mb-3">Microservice <span class="text-kick">Showcase</span></h2>
+      <p class="text-fog text-sm mb-10 max-w-xl leading-relaxed">One tiny question, served every way imaginable. Each implementation lives in <code class="text-chalk">service/</code> and builds with <code class="text-chalk">make all</code>.</p>
+      <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <li><a href="https://github.com/defstream/go-kickable/tree/master/service/graphql" class="group flex items-center justify-between border-2 border-ink-3 px-5 py-4 hover:border-kick hover:bg-ink-2 transition-colors"><span class="font-bold">GraphQL</span><span class="text-kick opacity-0 group-hover:opacity-100 transition-opacity">→</span></a></li>
+        <li><a href="https://github.com/defstream/go-kickable/tree/master/service/grpc" class="group flex items-center justify-between border-2 border-ink-3 px-5 py-4 hover:border-kick hover:bg-ink-2 transition-colors"><span class="font-bold">gRPC</span><span class="text-kick opacity-0 group-hover:opacity-100 transition-opacity">→</span></a></li>
+        <li><a href="https://github.com/defstream/go-kickable/tree/master/service/micro" class="group flex items-center justify-between border-2 border-ink-3 px-5 py-4 hover:border-kick hover:bg-ink-2 transition-colors"><span class="font-bold">Go-Micro</span><span class="text-kick opacity-0 group-hover:opacity-100 transition-opacity">→</span></a></li>
+        <li><a href="https://github.com/defstream/go-kickable/tree/master/service/http" class="group flex items-center justify-between border-2 border-ink-3 px-5 py-4 hover:border-kick hover:bg-ink-2 transition-colors"><span class="font-bold">HTTP</span><span class="text-kick opacity-0 group-hover:opacity-100 transition-opacity">→</span></a></li>
+        <li><a href="https://github.com/defstream/go-kickable/tree/master/service/kite" class="group flex items-center justify-between border-2 border-ink-3 px-5 py-4 hover:border-kick hover:bg-ink-2 transition-colors"><span class="font-bold">KITE</span><span class="text-kick opacity-0 group-hover:opacity-100 transition-opacity">→</span></a></li>
+        <li><a href="https://github.com/defstream/go-kickable/tree/master/service/rpc/gob" class="group flex items-center justify-between border-2 border-ink-3 px-5 py-4 hover:border-kick hover:bg-ink-2 transition-colors"><span class="font-bold">RPC / GOB</span><span class="text-kick opacity-0 group-hover:opacity-100 transition-opacity">→</span></a></li>
+        <li><a href="https://github.com/defstream/go-kickable/tree/master/service/rpc/json" class="group flex items-center justify-between border-2 border-ink-3 px-5 py-4 hover:border-kick hover:bg-ink-2 transition-colors"><span class="font-bold">RPC / JSON</span><span class="text-kick opacity-0 group-hover:opacity-100 transition-opacity">→</span></a></li>
+        <li class="flex items-center justify-between border-2 border-dashed border-ink-3 px-5 py-4 text-fog"><span>Caching · Pub/Sub · Serverless</span><span class="text-xs">soon</span></li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- footer -->
+  <footer class="border-t-4 border-vinyl bg-ink-2">
+    <div class="max-w-5xl mx-auto px-6 py-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 text-sm text-fog">
+      <div>
+        <p class="font-display text-chalk text-lg mb-1">Yes, yes you can.</p>
+        <p>MIT License · Pull requests welcome — make sure all tests pass 😀</p>
+      </div>
+      <div class="text-left sm:text-right">
+        <p>Maintained by Hector Gray</p>
+        <a href="https://twitter.com/defstream" class="text-kick hover:text-vinyl transition-colors">@defstream</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mirrors kickable.Kickable / kickable.CanIKick from kickable.go
+    const YES = "Yes, yes you can.";
+    const NO = "No.";
+    const kickable = (s) => s.trim().toLowerCase() === "it";
+    const canIKick = (it) => (kickable(it) ? YES : NO);
+
+    const form = document.getElementById("kick-form");
+    const input = document.getElementById("kick-input");
+    const output = document.getElementById("kick-output");
+
+    const render = () => {
+      const answer = canIKick(input.value);
+      output.textContent = answer + " ";
+      output.classList.toggle("text-kick", answer === YES);
+      output.classList.toggle("text-vinyl", answer === NO);
+    };
+    form.addEventListener("submit", (e) => { e.preventDefault(); render(); });
+    render();
+
+    const copyBtn = document.getElementById("copy-install");
+    const copyLabel = document.getElementById("copy-label");
+    copyBtn.addEventListener("click", async () => {
+      await navigator.clipboard.writeText("go get github.com/defstream/go-kickable@latest");
+      copyLabel.textContent = "✓";
+      setTimeout(() => (copyLabel.textContent = "⧉"), 1500);
+    });
+  </script>
+</body>
+</html>
